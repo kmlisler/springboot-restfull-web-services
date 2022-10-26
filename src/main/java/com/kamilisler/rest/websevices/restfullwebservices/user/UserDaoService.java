@@ -1,17 +1,19 @@
 package com.kamilisler.rest.websevices.restfullwebservices.user;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
+@Component
 public class UserDaoService {
     private static  List<User> users = new ArrayList<>();
     private static int usersCount = 3;
     static {
         users.add(new User(1,"Kamil İşler",new Date()));
-        users.add(new User(1,"Ahmet İşler",new Date()));
-        users.add(new User(1,"Ali Veli",new Date()));
+        users.add(new User(2,"Ahmet İşler",new Date()));
+        users.add(new User(3,"Ali Veli",new Date()));
     }
     public List<User> findAll(){
         return users;
