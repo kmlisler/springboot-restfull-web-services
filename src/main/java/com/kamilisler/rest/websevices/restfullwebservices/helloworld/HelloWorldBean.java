@@ -1,4 +1,4 @@
-package com.kamilisler.rest.websevices.restfullwebservices;
+package com.kamilisler.rest.websevices.restfullwebservices.helloworld;
 
 public class HelloWorldBean {
     private String message;
