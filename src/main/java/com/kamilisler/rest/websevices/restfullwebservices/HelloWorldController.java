@@ -12,4 +12,9 @@ public class HelloWorldController {
     public String helloWorld(){
         return "Hello Restfull web services training!222";
     }
+
+    @GetMapping(path = "/first-bean")
+    public HelloWorldBean firstBean(){
+        return new HelloWorldBean("this is my first bean");
+    }
 }
