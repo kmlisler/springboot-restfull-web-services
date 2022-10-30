@@ -1,10 +1,15 @@
 package com.kamilisler.rest.websevices.restfullwebservices.user;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class User {
     private Integer id;
+    @Size(min = 3, message = "İsim en az 3 harfli olmalı !")
     private String name;
+    @Past
     private Date birthDate;
 
     public User(Integer id, String name, Date birthDate) {

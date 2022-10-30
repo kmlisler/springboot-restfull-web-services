@@ -3,6 +3,7 @@ package com.kamilisler.rest.websevices.restfullwebservices.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,8 +26,12 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public void createUser(@RequestBody User user){
+    public void createUser(@Valid @RequestBody User user){
         User savedUser = userService.saveUser(user);
+    }
+    @PostMapping("/users/delete/{id}")
+    public void deleteUser(@PathVariable Integer id){
+        User savedUser = userService.deleteUser(id);
     }
 
 

@@ -34,4 +34,15 @@ public class UserDaoService {
         }
         return null;
     }
+    public User deleteUser(Integer id){
+
+        for (int i= 0; i<users.size();i++){
+            if (Objects.equals(users.get(i).getId(), id)){
+                User removedUser = users.get(i);
+                users.remove(removedUser);
+                return removedUser;
+            }
+        }
+        return null;
+    }
 }
