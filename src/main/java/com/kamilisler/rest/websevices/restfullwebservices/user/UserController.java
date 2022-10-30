@@ -8,24 +8,25 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
     @Autowired
-    private UserDaoService userService;
+    private UserRepository userRepository;
 
     @GetMapping("/users")
     public List<User> retrieveAllUsers(){
-        return userService.findAll();
+        return userRepository.findAll();
     }
 
     @GetMapping("/users/{id}")
-    public EntityModel<User> retrieveUser(@PathVariable Integer id){
-        User user = userService.findUser(id);
-        if (user == null){
+    public EntityModel<Optional<User>> retrieveUser(@PathVariable Integer id){
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()){
             throw new UserNotFoundException("id : "+id );
         }
-        EntityModel<User> model = EntityModel.of(user);
+        EntityModel<Optional<User>> model = EntityModel.of(user);
         // bir response ile birlikte diğer userların gösterilebileceği linki göstermek için hardcoded yazmak yerine
         // hateoas frameworkü ve MvcLinkBuilder ile response'a link koymayı sağladık
         // bu uygulamyı kullanan kişilere tüm user'ları gösterecek linki gösterdik. resource'larımıza veri döndürdük yani
@@ -38,11 +39,11 @@ public class UserController {
 
     @PostMapping("/users")
     public void createUser(@Valid @RequestBody User user){
-        User savedUser = userService.saveUser(user);
+        User savedUser = userRepository.save(user);
     }
-    @PostMapping("/users/delete/{id}")
-    public void deleteUser(@PathVariable Integer id){
-        User savedUser = userService.deleteUser(id);
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable int id){
+        userRepository.deleteById(id);
     }
 
 
