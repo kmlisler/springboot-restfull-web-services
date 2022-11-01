@@ -1,13 +1,11 @@
 package com.kamilisler.rest.websevices.restfullwebservices.user;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User {
@@ -17,6 +15,8 @@ public class User {
     private String name;
     @Past
     private Date birth;
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
     public User(Integer id, String name, Date birthDate) {
         this.id = id;
